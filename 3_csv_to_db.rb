@@ -21,11 +21,13 @@ class Ref < ActiveRecord::Base
   self.table_name = "Ref"
 end
 
+Ref.delete_all
+
 h = {}
 
 CSV.foreach("./db.csv") do |row|
   k = h[row[0]]
-  h[row[0]] = (k == nil ? "" : k + "\n") + row[1]
+  h[row[0]] = (k == nil ? "" : k + "\n\n") + row[1]
 end
 
 h.each_pair{|k, v|

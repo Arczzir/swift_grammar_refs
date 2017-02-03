@@ -2,16 +2,29 @@ a = document.getElementsByClassName("syntax-defs")
 
 function contents(e) {
   var result = []
-  var t = e.children
+  var t = e.childNodes
+  var elementTotal = e.children.length
   if (t.length == 0) {
     result.push(e.textContent.trim())
   } else {
+    var j = 0
     for(var i=0;i<t.length;i++){
-      var tta = contents(t[i]) 
-      if(t[i].className == "alternative" && i != t.length-1) {
-        tta.push("⎥")
+      var tta = []
+      if (t[i].nodeType == 1) {
+        j += 1
+        tta = contents(t[i]) 
+        if(t[i].className == "alternative" && j != elementTotal) {
+          tta.push("⎥")
+        }
+      } else if (t[i].nodeType == 3) {
+        var s = t[i].textContent.trim()
+        if (s.length > 0) {
+          tta = [s]
+        }
       }
-      result.push(tta)
+      if (tta.length > 0) {
+        result.push(tta)
+      }
     }
   }
   return result
