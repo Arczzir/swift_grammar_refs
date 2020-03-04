@@ -1,4 +1,4 @@
-a = document.getElementsByClassName("syntax-defs")
+a = document.getElementsByClassName("syntax-group")
 
 function contents(e) {
   var result = []

@@ -9,12 +9,12 @@ ActiveRecord::Base.establish_connection(
 )
 
 
-#ActiveRecord::Schema.define do
-  #create_table :ref, force: true do |t|
-    #t.string :key_id
-    #t.string :value
-  #end
-#end
+ActiveRecord::Schema.define do
+  create_table "Ref", force: true do |t|
+    t.string :key_id
+    t.string :value
+  end
+end
 
 
 class Ref < ActiveRecord::Base
@@ -36,3 +36,9 @@ h.each_pair{|k, v|
   r.value = v
   r.save
 }
+
+
+r = Ref.new
+r.key_id = "__root__"
+r.value = "identifier\nliteral\noperator\ntype\nexpression\nstatement\ndeclaration\nattribute\npattern"
+r.save
